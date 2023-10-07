@@ -3,13 +3,13 @@ TIME=$(date "+%m-%d-%H-%M")
 OUTPUT_DIR=/data/xukp/models/llama/llama-2-7b-sft-$TIME
 MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-llama--Llama-2-7b-hf/snapshots/6fdf2e60f86ff2481f2241aaee459f85b5b0bbb9
 TEMPLATE=vanilla
-DATASET=split_p
+DATASET=split_s
 VAL_SIZE=0
-NUM_GPUS=2
+NUM_GPUS=8
+# accelerate launch src/train_bash.py \
 
-# deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
-# --deepspeed ds_config.json \
-accelerate launch src/train_bash.py \
+deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
+    --deepspeed ds_config.json \
     --stage sft \
     --model_name_or_path $MODEL_NAME_OR_PATH \
     --do_train True \
@@ -22,7 +22,7 @@ accelerate launch src/train_bash.py \
     --learning_rate 5e-05 \
     --num_train_epochs 3.0 \
     --max_samples 100000 \
-    --per_device_train_batch_size 1 \
+    --per_device_train_batch_size 2 \
     --gradient_accumulation_steps 4 \
     --lr_scheduler_type cosine \
     --max_grad_norm 1.0 \

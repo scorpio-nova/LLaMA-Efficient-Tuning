@@ -1,8 +1,10 @@
-OUTPUT_DIR=saves/LLaMA2-7B/lora/2023-10-07-16-47-30
+TIME=$(date "+%m-%d-%H-%M")
+
+OUTPUT_DIR=/data/xukp/models/llama/llama-2-7b-lora-$TIME
 MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-llama--Llama-2-7b-hf/snapshots/6fdf2e60f86ff2481f2241aaee459f85b5b0bbb9
 TEMPLATE=vanilla
-DATASET=split_p
-VAL_SIZE=0.05
+DATASET=split_s
+VAL_SIZE=0
 
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --stage sft \
@@ -31,8 +33,8 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --resume_lora_training True \
     --output_dir $OUTPUT_DIR \
     --fp16 True \
-    --val_size $VAL_SIZE \
-    --evaluation_strategy steps \
-    --eval_steps 20 \
-    --load_best_model_at_end True \
     --plot_loss True 
+    # --val_size $VAL_SIZE \
+    # --evaluation_strategy steps \
+    # --eval_steps 20 \
+    # --load_best_model_at_end True \
