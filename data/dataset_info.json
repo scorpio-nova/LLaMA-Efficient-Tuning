@@ -3,6 +3,18 @@
     "file_name": "solving.json",
     "file_sha1": "fa05bbb8d3ef904e3dda57dd8ee6f1dd3608a864"
   },
+  "solving_wprefix": {
+    "file_name": "solving_wprefix.json",
+    "file_sha1": "7de4ca413a41be876d615de4a80cbe805327f03a"
+  },
+  "solving_only_steps": {
+    "file_name": "solving_only_steps.json",
+    "file_sha1": "fa36cc2ad9aa77939db27eebaae50a81e6458884"
+  },
+  "solving_os_wprefix": {
+    "file_name": "solving_os_wprefix.json",
+    "file_sha1": "05621dafb4d1aeda6a4cf6571f3ee1d4b8a6c7bb"
+  },
   "split_p": {
     "file_name": "split_p.json",
     "file_sha1": "33057a960f82e613a72b8e257e2a5b36fc463d3f"

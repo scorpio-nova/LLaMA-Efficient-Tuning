@@ -1,12 +1,16 @@
 TIME=$(date "+%m-%d-%H-%M")
-
-OUTPUT_DIR=/data/xukp/models/llama/llama-2-7b-solving-sft-$TIME
+DATASET=solving_wprefix
+OUTPUT_DIR=/data/xukp/models/llama/llama-2-7b-$DATASET-$TIME
+# origina model 7B
 # MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-llama--Llama-2-7b-hf/snapshots/6fdf2e60f86ff2481f2241aaee459f85b5b0bbb9
-MODEL_NAME_OR_PATH=/data/xukp/models/llama/llama2-7b-added_special_tokens   # added special tokens
+# code llama
+MODEL_NAME_OR_PATH=/lustre/cache/huggingface/models--codellama--CodeLlama-34b-hf/snapshots/fda69408949a7c6689a3cf7e93e632b8e70bb8ad
+# model added special tokens
+# MODEL_NAME_OR_PATH=/data/xukp/models/llama/llama2-7b-added_special_tokens   # added special tokens
 TEMPLATE=vanilla
-DATASET=solving
 VAL_SIZE=0.05
 NUM_GPUS=4
+EPOCHS=3
 # accelerate launch src/train_bash.py \
 
 deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
@@ -21,7 +25,7 @@ deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
     --dataset $DATASET \
     --cutoff_len 8192 \
     --learning_rate 5e-05 \
-    --num_train_epochs 3.0 \
+    --num_train_epochs $EPOCHS \
     --max_samples 100000 \
     --per_device_train_batch_size 2 \
     --gradient_accumulation_steps 4 \
@@ -40,5 +44,5 @@ deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
     --plot_loss True \
     --val_size $VAL_SIZE \
     --evaluation_strategy steps \
-    --eval_steps 20 \
+    --eval_steps 10 \
     --load_best_model_at_end True
