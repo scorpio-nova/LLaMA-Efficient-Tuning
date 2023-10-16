@@ -1,4 +1,8 @@
 {
+  "solving": {
+    "file_name": "solving.json",
+    "file_sha1": "fa05bbb8d3ef904e3dda57dd8ee6f1dd3608a864"
+  },
   "split_p": {
     "file_name": "split_p.json",
     "file_sha1": "33057a960f82e613a72b8e257e2a5b36fc463d3f"

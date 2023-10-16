@@ -1,11 +1,12 @@
 TIME=$(date "+%m-%d-%H-%M")
 
-OUTPUT_DIR=/data/xukp/models/llama/llama-2-7b-sft-$TIME
-MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-llama--Llama-2-7b-hf/snapshots/6fdf2e60f86ff2481f2241aaee459f85b5b0bbb9
+OUTPUT_DIR=/data/xukp/models/llama/llama-2-7b-solving-sft-$TIME
+# MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-llama--Llama-2-7b-hf/snapshots/6fdf2e60f86ff2481f2241aaee459f85b5b0bbb9
+MODEL_NAME_OR_PATH=/data/xukp/models/llama/llama2-7b-added_special_tokens   # added special tokens
 TEMPLATE=vanilla
-DATASET=split_s
-VAL_SIZE=0
-NUM_GPUS=8
+DATASET=solving
+VAL_SIZE=0.05
+NUM_GPUS=4
 # accelerate launch src/train_bash.py \
 
 deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
@@ -36,4 +37,8 @@ deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
     --resume_lora_training True \
     --output_dir $OUTPUT_DIR \
     --fp16 True \
-    --plot_loss True 
+    --plot_loss True \
+    --val_size $VAL_SIZE \
+    --evaluation_strategy steps \
+    --eval_steps 20 \
+    --load_best_model_at_end True
