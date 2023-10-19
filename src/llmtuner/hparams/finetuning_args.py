@@ -8,6 +8,10 @@ class FinetuningArguments:
     r"""
     Arguments pertaining to which techniques we are going to fine-tuning with.
     """
+    stage: Optional[Literal["pt", "sft", "rm", "ppo", "dpo"]] = field(
+        default="sft",
+        metadata={"help": "Which stage will be performed in training."}
+    )
     finetuning_type: Optional[Literal["lora", "freeze", "full", "none"]] = field(
         default="lora",
         metadata={"help": "Which fine-tuning method to use."}
@@ -57,7 +61,15 @@ class FinetuningArguments:
     )
     ppo_score_norm: Optional[bool] = field(
         default=False,
-        metadata={"help": "Use score normalization in PPO Training."}
+        metadata={"help": "Use score normalization in PPO training."}
+    )
+    ppo_logger: Optional[str] = field(
+        default=None,
+        metadata={"help": "Log with either 'wandb' or 'tensorboard' in PPO training."}
+    )
+    ppo_target: Optional[float] = field(
+        default=6.0,
+        metadata={"help": "Target KL value for adaptive KL control in PPO training."}
     )
     dpo_beta: Optional[float] = field(
         default=0.1,
