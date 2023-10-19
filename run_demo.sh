@@ -4,7 +4,7 @@
 # lora finetuned model
 # LORA_PATH=/data/xukp/models/llama/llama-2-7b-lora-10-07-18-51
 # solving model
-LLAMA2_PATH=/data/xukp/models/llama/llama-2-7b-solving-10-16-22-10
+LLAMA2_PATH=/data/xukp/models/llama/llama-2-7b-all_solving_only_steps-10-18-20-25
 
 # LORA_PATH=/root/code/LLaMA-Efficient-Tuning/saves/LLaMA2-7B/lora/2023-10-07-16-09-03
 TEMPLATE=vanilla

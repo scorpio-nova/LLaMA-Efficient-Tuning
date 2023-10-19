@@ -173,6 +173,8 @@ def load_model_and_tokenizer(
         config=config,
         torch_dtype=model_args.compute_dtype,
         low_cpu_mem_usage=(not is_deepspeed_zero3_enabled()),
+        # xukp: change to load directly to the GPUs
+        # device_map = "cuda:{}".format(os.environ.get("LOCAL_RANK", "0")),
         **config_kwargs
     )
 
