@@ -4,14 +4,16 @@
 # lora finetuned model
 # LORA_PATH=/data/xukp/models/llama/llama-2-7b-lora-10-07-18-51
 # solving model
-LLAMA2_PATH=/data/xukp/models/llama/llama-2-7b-all_solving_only_steps-10-18-20-25
+# LLAMA2_PATH=/root/models/llama-tuned/codellama-34b-lora-solving_only_steps-10-19-10-10
+LLAMA2_PATH=/lustre/cache/huggingface/models--codellama--CodeLlama-34b-hf/snapshots/fda69408949a7c6689a3cf7e93e632b8e70bb8ad
 
 # LORA_PATH=/root/code/LLaMA-Efficient-Tuning/saves/LLaMA2-7B/lora/2023-10-07-16-09-03
+LORA_PATH=/root/models/llama-tuned/codellama-34b-lora-solving_wprefix-10-19-16-30
 TEMPLATE=vanilla
 
 # python src/cli_demo.py \
 python src/web_demo.py \
     --model_name_or_path $LLAMA2_PATH \
     --template $TEMPLATE \
-    # --finetuning_type lora \
-    # --checkpoint_dir $LORA_PATH
+    --finetuning_type lora \
+    --checkpoint_dir $LORA_PATH

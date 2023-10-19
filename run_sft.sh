@@ -1,24 +1,25 @@
 TIME=$(date "+%m-%d-%H-%M")
-DATASET=all_solving_only_steps
+DATASET=solving_only_steps
 # set HF_HOME env
 # export HF_HOME=/lustre/cache/huggingface
-OUTPUT_DIR=~/models/llama-tuned/llama-2-7b-$DATASET-$TIME
-# OUTPUT_DIR=~/models/llama-tuned/codellama-34b-$DATASET-$TIME
+# OUTPUT_DIR=~/models/llama-tuned/llama-2-7b-$DATASET-$TIME
+OUTPUT_DIR=~/models/llama-tuned/codellama-34b-$DATASET-$TIME
 # origina model 7B
-# MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-llama--Llama-2-7b-hf/snapshots/6fdf2e60f86ff2481f2241aaee459f85b5b0bbb9
+MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-llama--Llama-2-7b-hf/snapshots/6fdf2e60f86ff2481f2241aaee459f85b5b0bbb9
 # code llama
 # MODEL_NAME_OR_PATH=/lustre/cache/huggingface/models--codellama--CodeLlama-34b-hf/snapshots/fda69408949a7c6689a3cf7e93e632b8e70bb8ad
 # MODEL_NAME_OR_PATH="codellama/CodeLlama-34b-hf"
 # model added special tokens
-MODEL_NAME_OR_PATH=/data/xukp/models/llama/llama2-7b-added_special_tokens   # added special tokens
+# MODEL_NAME_OR_PATH=/data/xukp/models/llama/llama2-7b-added_special_tokens   # added special tokens
 TEMPLATE=vanilla
 VAL_SIZE=0.05
-NUM_GPUS=4
-EPOCHS=2
+NUM_GPUS=8
+EPOCHS=3
 # accelerate launch src/train_bash.py \
 
-deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
-    --deepspeed ds_config.json \
+# deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
+deepspeed --hostfile hostfile.txt src/train_bash.py \
+    --deepspeed "ds_config_stage2_off_optim&param.json" \
     --stage sft \
     --model_name_or_path $MODEL_NAME_OR_PATH \
     --do_train True \
