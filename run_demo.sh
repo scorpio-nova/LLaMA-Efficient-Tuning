@@ -8,7 +8,7 @@
 LLAMA2_PATH=/lustre/cache/huggingface/models--codellama--CodeLlama-34b-hf/snapshots/fda69408949a7c6689a3cf7e93e632b8e70bb8ad
 
 # LORA_PATH=/root/code/LLaMA-Efficient-Tuning/saves/LLaMA2-7B/lora/2023-10-07-16-09-03
-LORA_PATH=/root/models/llama-tuned/codellama-34b-lora-solving_wprefix-10-19-16-30
+LORA_PATH=/root/models/llama-tuned/codellama-34b-lora-solving_os_wprefix-10-24-14-51
 TEMPLATE=vanilla
 
 # python src/cli_demo.py \

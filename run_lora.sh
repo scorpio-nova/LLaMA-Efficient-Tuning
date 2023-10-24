@@ -1,5 +1,5 @@
 TIME=$(date "+%m-%d-%H-%M")
-DATASET=solving_wprefix
+DATASET=solving_os_wprefix
 # set HF_HOME env
 # export HF_HOME=/lustre/cache/huggingface
 # OUTPUT_DIR=~/models/llama-tuned/llama-2-7b-lora-$DATASET-$TIME
@@ -14,10 +14,11 @@ MODEL_NAME_OR_PATH=/lustre/cache/huggingface/models--codellama--CodeLlama-34b-hf
 TEMPLATE=vanilla
 VAL_SIZE=0.05
 NUM_GPUS=8
-EPOCHS=15
+EPOCHS=3
+LORA_RANK=96
 
 deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
-    --deepspeed "ds_config_stage2_off_optim&param.json" \
+    --deepspeed "stage2_off_optim&param.json" \
     --stage sft \
     --model_name_or_path $MODEL_NAME_OR_PATH \
     --do_train True \
@@ -37,8 +38,7 @@ deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
     --logging_steps 5 \
     --save_steps 200 \
     --warmup_steps 0 \
-    --flash_attn False \
-    --lora_rank 8 \
+    --lora_rank $LORA_RANK \
     --lora_dropout 0.1 \
     --lora_target q_proj,v_proj \
     --resume_lora_training True \
@@ -48,5 +48,5 @@ deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
     --val_size $VAL_SIZE \
     --evaluation_strategy steps \
     --eval_steps 20 \
-    --load_best_model_at_end True \
     --flash_attn
+    # --load_best_model_at_end True \
