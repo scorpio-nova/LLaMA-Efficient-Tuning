@@ -75,6 +75,14 @@ class FinetuningArguments:
         default=0.1,
         metadata={"help": "The beta parameter for the DPO loss."}
     )
+    upcast_layernorm: Optional[bool] = field(
+        default=False,
+        metadata={"help": "Whether to upcast the layernorm weights in fp32."}
+    )
+    neft_alpha: Optional[float] = field(
+        default=0,
+        metadata={"help": "The alpha parameter to control the noise magnitude in NEFTune."}
+    )
 
     def __post_init__(self):
         if isinstance(self.lora_target, str): # support custom target modules/layers of LoRA

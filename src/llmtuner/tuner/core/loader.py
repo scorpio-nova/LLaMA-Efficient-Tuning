@@ -206,8 +206,7 @@ def load_model_and_tokenizer(
         tokenizer.__class__.register_for_auto_class()
 
     # Initialize adapters
-    if is_trainable:
-        model = prepare_model_for_training(model, model_args.upcast_layernorm, finetuning_args.finetuning_type)
+    model = prepare_model_for_training(model=model, finetuning_args=finetuning_args) if is_trainable else model
     model = init_adapter(model, model_args, finetuning_args, is_trainable, is_mergeable)
     model = model.train() if is_trainable else model.eval()
 
@@ -239,5 +238,8 @@ def load_model_and_tokenizer(
     logger.info("trainable params: {:d} || all params: {:d} || trainable%: {:.4f}".format(
         trainable_params, all_param, 100 * trainable_params / all_param
     ))
+
+    if not is_trainable:
+        logger.info("This IS expected that the trainable params is 0 if you are using model for inference only.")
 
     return model, tokenizer

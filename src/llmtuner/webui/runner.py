@@ -89,7 +89,6 @@ class Runner:
             stage=TRAINING_STAGES[get("train.training_stage")],
             model_name_or_path=get("top.model_path"),
             do_train=True,
-            overwrite_cache=False,
             cache_dir=user_config.get("cache_dir", None),
             checkpoint_dir=checkpoint_dir,
             finetuning_type=get("top.finetuning_type"),
@@ -112,9 +111,13 @@ class Runner:
             logging_steps=get("train.logging_steps"),
             save_steps=get("train.save_steps"),
             warmup_steps=get("train.warmup_steps"),
+            neft_alpha=get("train.neft_alpha"),
+            train_on_prompt=get("train.train_on_prompt"),
+            upcast_layernorm=get("train.upcast_layernorm"),
             lora_rank=get("train.lora_rank"),
             lora_dropout=get("train.lora_dropout"),
             lora_target=get("train.lora_target") or get_module(get("top.model_name")),
+            additional_target=get("train.additional_target") if get("train.additional_target") else None,
             resume_lora_training=get("train.resume_lora_training"),
             output_dir=output_dir
         )
@@ -160,7 +163,6 @@ class Runner:
             stage="sft",
             model_name_or_path=get("top.model_path"),
             do_eval=True,
-            overwrite_cache=False,
             predict_with_generate=True,
             cache_dir=user_config.get("cache_dir", None),
             checkpoint_dir=checkpoint_dir,
@@ -179,7 +181,7 @@ class Runner:
             max_new_tokens=get("eval.max_new_tokens"),
             top_p=get("eval.top_p"),
             temperature=get("eval.temperature"),
-            output_dir=get("eval.output_dir")
+            output_dir=output_dir
         )
 
         if get("eval.predict"):
