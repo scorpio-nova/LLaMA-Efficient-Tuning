@@ -88,8 +88,8 @@ def get_train_args(
     transformers.utils.logging.enable_default_handler()
     transformers.utils.logging.enable_explicit_format()
 
-    # Check arguments (do not check finetuning_args since it may be loaded from checkpoints)
-    data_args.init_for_training()
+    # Check arguments
+    data_args.init_for_training(training_args.seed)
 
     if finetuning_args.stage != "pt" and data_args.template is None:
         raise ValueError("Please specify which `template` to use.")
@@ -146,7 +146,7 @@ def get_train_args(
             if not finetuning_args.resume_lora_training:
                 raise ValueError("Quantized model cannot create new LoRA weight. Merge them first.")
 
-    if training_args.do_train and model_args.quantization_bit is not None and (not model_args.upcast_layernorm):
+    if training_args.do_train and model_args.quantization_bit is not None and (not finetuning_args.upcast_layernorm):
         logger.warning("We recommend enable `upcast_layernorm` in quantized training.")
 
     if training_args.do_train and (not training_args.fp16) and (not training_args.bf16):
