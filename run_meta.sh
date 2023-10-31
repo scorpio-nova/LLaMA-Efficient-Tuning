@@ -1,40 +1,26 @@
 TIME=$(date "+%m-%d-%H-%M")
-DATASET=augmented_steps
+DATASET=meta_math
 TEMPLATE=alpaca
 
 # wandb
-export WANDB_PROJECT=xukp20-llama-sft
+export WANDB_PROJECT=xukp20-$DATASET
 
 # set HF_HOME env
 # export HF_HOME=/lustre/cache/huggingface
 OUTPUT_DIR=~/models/llama-tuned/llama-2-7b-$TEMPLATE-$DATASET-$TIME
 # OUTPUT_DIR=~/models/llama-tuned/codellama-34b-$DATASET-$TIME
-
-# 7B
 # origina model 7B
-# MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-llama--Llama-2-7b-hf/snapshots/6fdf2e60f86ff2481f2241aaee459f85b5b0bbb9
-# metamath 7B
-# MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-math--MetaMath-7B-V1.0/snapshots/51b13691d345ff03f2ef70f3ec1ff69ff7aeaf76
-# my metamath 7B
-# MODEL_NAME_OR_PATH="/root/models/llama-tuned/llama-2-7b-alpaca-meta_math-10-28-10-20"
-# model added special tokens
-# MODEL_NAME_OR_PATH=/data/xukp/models/llama/llama2-7b-added_special_tokens   # added special tokens
-
-# Mistral 7B
-MODEL_NAME_OR_PATH="/data/cache/huggingface/hub/models--mistralai--Mistral-7B-v0.1/snapshots/5e9c98b96d071dce59368012254c55b0ec6f8658"
-
+MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-llama--Llama-2-7b-hf/snapshots/6fdf2e60f86ff2481f2241aaee459f85b5b0bbb9
 # code llama
 # MODEL_NAME_OR_PATH=/lustre/cache/huggingface/models--codellama--CodeLlama-34b-hf/snapshots/fda69408949a7c6689a3cf7e93e632b8e70bb8ad
 # MODEL_NAME_OR_PATH="codellama/CodeLlama-34b-hf"
-
-
-VAL_SIZE=0.01
+# model added special tokens
+# MODEL_NAME_OR_PATH=/data/xukp/models/llama/llama2-7b-added_special_tokens   # added special tokens
+VAL_SIZE=0.005
 NUM_GPUS=8
 # LR=5e-5
-LR=2e-6 # for meta_math
+LR=2e-5 # for meta_math
 EPOCHS=3
-CUTOFF_LEN=4096
-
 # accelerate launch src/train_bash.py \
 # deepspeed --hostfile hostfile.txt src/train_bash.py \
 deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
@@ -47,10 +33,10 @@ deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
     --template $TEMPLATE \
     --dataset_dir data \
     --dataset $DATASET \
-    --cutoff_len $CUTOFF_LEN \
+    --cutoff_len 8192 \
     --learning_rate $LR \
     --num_train_epochs $EPOCHS \
-    --max_samples 100000 \
+    --max_samples 10000000 \
     --per_device_train_batch_size 4 \
     --per_device_eval_batch_size 4 \
     --gradient_accumulation_steps 4 \

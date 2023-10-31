@@ -1,13 +1,13 @@
 TIME=$(date "+%m-%d-%H-%M")
-DATASET=augmented_steps
+DATASET=solving_nve_nups
 TEMPLATE=alpaca
 
 # wandb
-export WANDB_PROJECT=xukp20-llama-sft
+export WANDB_PROJECT=xukp20-mistral-sft
 
 # set HF_HOME env
 # export HF_HOME=/lustre/cache/huggingface
-OUTPUT_DIR=~/models/llama-tuned/llama-2-7b-$TEMPLATE-$DATASET-$TIME
+OUTPUT_DIR=~/models/llama-tuned/mistral-7b-$TEMPLATE-$DATASET-$TIME
 # OUTPUT_DIR=~/models/llama-tuned/codellama-34b-$DATASET-$TIME
 
 # 7B
@@ -29,9 +29,9 @@ MODEL_NAME_OR_PATH="/data/cache/huggingface/hub/models--mistralai--Mistral-7B-v0
 
 
 VAL_SIZE=0.01
-NUM_GPUS=8
+NUM_GPUS=4
 # LR=5e-5
-LR=2e-6 # for meta_math
+LR=2e-5
 EPOCHS=3
 CUTOFF_LEN=4096
 

@@ -1,39 +1,24 @@
 TIME=$(date "+%m-%d-%H-%M")
-DATASET=augmented_steps
+DATASET=solving_nve_nin_nups
 TEMPLATE=alpaca
 
 # wandb
-export WANDB_PROJECT=xukp20-llama-sft
+export WANDB_PROJECT=xukp20-chatglm-sft
 
 # set HF_HOME env
 # export HF_HOME=/lustre/cache/huggingface
-OUTPUT_DIR=~/models/llama-tuned/llama-2-7b-$TEMPLATE-$DATASET-$TIME
+OUTPUT_DIR=~/models/llama-tuned/chatglm3-6b-$TEMPLATE-$DATASET-$TIME
 # OUTPUT_DIR=~/models/llama-tuned/codellama-34b-$DATASET-$TIME
 
-# 7B
-# origina model 7B
-# MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-llama--Llama-2-7b-hf/snapshots/6fdf2e60f86ff2481f2241aaee459f85b5b0bbb9
-# metamath 7B
-# MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-math--MetaMath-7B-V1.0/snapshots/51b13691d345ff03f2ef70f3ec1ff69ff7aeaf76
-# my metamath 7B
-# MODEL_NAME_OR_PATH="/root/models/llama-tuned/llama-2-7b-alpaca-meta_math-10-28-10-20"
-# model added special tokens
-# MODEL_NAME_OR_PATH=/data/xukp/models/llama/llama2-7b-added_special_tokens   # added special tokens
-
-# Mistral 7B
-MODEL_NAME_OR_PATH="/data/cache/huggingface/hub/models--mistralai--Mistral-7B-v0.1/snapshots/5e9c98b96d071dce59368012254c55b0ec6f8658"
-
-# code llama
-# MODEL_NAME_OR_PATH=/lustre/cache/huggingface/models--codellama--CodeLlama-34b-hf/snapshots/fda69408949a7c6689a3cf7e93e632b8e70bb8ad
-# MODEL_NAME_OR_PATH="codellama/CodeLlama-34b-hf"
-
+# GLM 6B
+MODEL_NAME_OR_PATH="/lustre/cache/huggingface/hub/models--THUDM--chatglm3-6b-base/snapshots/c6561772567b9d13567e5372225ee2ec22379a9b"
 
 VAL_SIZE=0.01
 NUM_GPUS=8
 # LR=5e-5
-LR=2e-6 # for meta_math
+LR=2e-5
 EPOCHS=3
-CUTOFF_LEN=4096
+CUTOFF_LEN=8192
 
 # accelerate launch src/train_bash.py \
 # deepspeed --hostfile hostfile.txt src/train_bash.py \

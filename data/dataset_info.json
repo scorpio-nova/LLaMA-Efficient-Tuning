@@ -1,7 +1,40 @@
 {
+  "hint": {
+    "file_name": "hint.json"
+  },
+  "solving_nve_nin": {
+    "file_name": "solving_nve_nin_nups_wprefix.json"
+  },
+  "solving_nve_nin_nups": {
+    "file_name": "solving_nve_nin_nups.json"
+  },
+  "solving_nve_nups": {
+    "file_name": "solving_nve_nups.json"
+  },
+  "solving_nups": {
+    "file_name": "solving_nups.json"
+  },
+  "solving_nin_nups": {
+    "file_name": "solving_nin_nups.json"
+  },
   "solving": {
-    "file_name": "solving.json",
-    "file_sha1": "fa05bbb8d3ef904e3dda57dd8ee6f1dd3608a864"
+    "file_name": "solving.json"
+  },
+  "augmented_metalike": {
+    "file_name": "augmented_metalike.json"
+  },
+  "augmented_steps": {
+    "file_name": "augmented_steps.json"
+  },
+  "metalike": {
+    "file_name": "metalike.json"
+  },
+  "meta_math": {
+    "file_name": "metamathQA_new.json"
+  },
+  "problem_pretrain": {
+    "file_name": "problem_pretrain.json",
+    "file_sha1": "c4b5b0b0b2b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0"
   },
   "solving_wprefix": {
     "file_name": "solving_wprefix.json",

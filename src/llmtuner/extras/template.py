@@ -594,3 +594,24 @@ register_template(
     system="",
     sep=[]
 )
+
+
+# xukp: hint
+register_template(
+    name="hint",
+    prefix=[
+        "{{system}}"
+    ],
+    prompt=[
+        "\n{{query}}\n\n### Hint:\n"
+    ],
+    system=(
+        "You are a math expert and kind teacher who can help students solve math problems. "
+        "A student is working on a math problem and has finished part of the solution, but is stuck. "
+        "The problem is given after 'Problem:' and the student's work is given after 'Steps:'. "
+        "Your job is to come up with a HINT that can help him move one step forward based on the current work."
+    ),
+    sep=[
+        "\n\n"
+    ]
+)
