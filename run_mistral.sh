@@ -1,6 +1,6 @@
 TIME=$(date "+%m-%d-%H-%M")
-DATASET=solving_nve_nups
-TEMPLATE=alpaca
+DATASET=instruction
+TEMPLATE=solve
 
 # wandb
 export WANDB_PROJECT=xukp20-mistral-sft
@@ -29,7 +29,7 @@ MODEL_NAME_OR_PATH="/data/cache/huggingface/hub/models--mistralai--Mistral-7B-v0
 
 
 VAL_SIZE=0.01
-NUM_GPUS=4
+NUM_GPUS=8
 # LR=5e-5
 LR=2e-5
 EPOCHS=3
@@ -64,7 +64,7 @@ deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
     --lora_target q_proj,v_proj \
     --resume_lora_training True \
     --output_dir $OUTPUT_DIR \
-    --fp16 True \
+    --fp16 \
     --plot_loss True \
     --val_size $VAL_SIZE \
     --evaluation_strategy steps \

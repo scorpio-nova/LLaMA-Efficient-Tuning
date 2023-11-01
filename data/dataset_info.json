@@ -1,4 +1,7 @@
 {
+  "instruction": {
+    "file_name": "instruction.json"
+  },
   "hint": {
     "file_name": "hint.json"
   },

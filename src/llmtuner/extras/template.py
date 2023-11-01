@@ -637,3 +637,20 @@ register_template(
         "\n\n"
     ]
 )
+
+register_template(
+    name="solve",
+    prefix=[
+        "{{system}}"
+    ],
+    prompt=[
+        "\n{{query}}\n\n### Hint:\n"
+    ],
+    system=(
+        "You are a math expert and kind teacher who can help students solve math problems. "
+        "Some tasks in solving the problem are given to you. "
+    ),
+    sep=[
+        "\n\n"
+    ]
+)

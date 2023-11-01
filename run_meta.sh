@@ -50,7 +50,7 @@ deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
     --lora_target q_proj,v_proj \
     --resume_lora_training True \
     --output_dir $OUTPUT_DIR \
-    --fp16 True \
+    --fp16 \
     --plot_loss True \
     --val_size $VAL_SIZE \
     --evaluation_strategy steps \
