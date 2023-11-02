@@ -644,7 +644,7 @@ register_template(
         "{{system}}"
     ],
     prompt=[
-        "\n{{query}}\n\n### Hint:\n"
+        "{{query}}"
     ],
     system=(
         "You are a math expert and kind teacher who can help students solve math problems. "

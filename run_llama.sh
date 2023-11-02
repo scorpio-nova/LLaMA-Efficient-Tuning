@@ -18,7 +18,7 @@ MODEL_NAME_OR_PATH=/data/cache/huggingface/hub/models--meta-llama--Llama-2-7b-hf
 # my metamath 7B
 # MODEL_NAME_OR_PATH="/root/models/llama-tuned/llama-2-7b-alpaca-meta_math-10-28-10-20"
 # model added special tokens
-# MODEL_NAME_OR_PATH=/data/xukp/models/llama/llama2-7b-added_special_tokens   # added special tokens
+# MODEL_NAME_OR_PATH=/root/models/modified/llama2-7b-added_output_period   # added special tokens [OUTPUT] and [PERIOD]
 
 # Mistral 7B
 # MODEL_NAME_OR_PATH="/data/cache/huggingface/hub/models--mistralai--Mistral-7B-v0.1/snapshots/5e9c98b96d071dce59368012254c55b0ec6f8658"

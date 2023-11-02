@@ -1,5 +1,5 @@
 TIME=$(date "+%m-%d-%H-%M")
-DATASET=instruction
+DATASET=instruction_no_added
 TEMPLATE=solve
 
 # wandb
@@ -57,7 +57,7 @@ deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
     --lr_scheduler_type cosine \
     --max_grad_norm 1.0 \
     --logging_steps 5 \
-    --save_steps 200 \
+    --save_steps 100 \
     --warmup_steps 0 \
     --lora_rank 8 \
     --lora_dropout 0.1 \
