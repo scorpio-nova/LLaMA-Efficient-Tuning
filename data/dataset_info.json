@@ -2,8 +2,29 @@
   "instruction": {
     "file_name": "instruction.json"
   },
+  "instruction_nv": {
+    "file_name": "instruction_nv.json"
+  },
+  "instruction_nv_no_added": {
+    "file_name": "instruction_nv_no_added.json"
+  },
+  "instruction_nh_nv_no_added": {
+    "file_name": "instruction_nh_nv_no_added.json"
+  },
   "instruction_no_added": {
     "file_name": "instruction_no_added.json"
+  },
+  "assist_hint": {
+    "file_name": "assist_hint.json"
+  },
+  "assist_conditions": {
+    "file_name": "assist_conditions.json"
+  },
+  "assist_hint_summary": {
+    "file_name": "assist_hint_summary.json"
+  },
+  "assist_steps": {
+    "file_name": "assist_steps.json"
   },
   "hint": {
     "file_name": "hint.json"

@@ -618,6 +618,48 @@ register_template(
 )
 
 
+
+# xukp:split conditions and question
+register_template(
+    name="conditions",
+    prefix=[
+        "{{system}}"
+    ],
+    prompt=[
+        "{{query}}"
+    ],
+    system=(
+        "You are a math expert and kind teacher who can help students solve math problems. "
+        "A student is working on a math problem and we want to teach him how to analyze the problem. "
+        "The problem is given after '### Problem:' "
+        "You should present the important conditions of the problem after '### Conditions:'. "
+        "And you should present the question of the problem after '### Question:'. "
+    ),
+    sep=[
+        "\n\n"
+    ]
+)
+
+# xukp: split steps
+register_template(
+    name="steps",
+    prefix=[
+        "{{system}}"
+    ],
+    prompt=[
+        "{{query}}"
+    ],
+    system=(
+        "You are a math expert and kind teacher who can help students solve math problems. "
+        "Now we have a problem and the reference solution to it, but the solution is not clear enough. "
+        "The problem is given after '### Problem:' and the solution is given after '### Solution:'. "
+        "Your task is to split the solution into several steps and present each step after '### Steps:'. "
+    ),
+    sep=[
+        "\n\n"
+    ]
+)
+
 # xukp: hint
 register_template(
     name="hint",
@@ -625,18 +667,40 @@ register_template(
         "{{system}}"
     ],
     prompt=[
-        "\n{{query}}\n\n### Hint:\n"
+        "{{query}}"
     ],
     system=(
         "You are a math expert and kind teacher who can help students solve math problems. "
         "A student is working on a math problem and has finished part of the solution, but is stuck. "
-        "The problem is given after 'Problem:' and the student's work is given after 'Steps:'. "
+        "The problem is given after '### Problem:' and the student's work is given after '### Steps:'. "
         "Your job is to come up with a HINT that can help him move one step forward based on the current work."
     ),
     sep=[
         "\n\n"
     ]
 )
+
+register_template(
+    name="hint_summary",
+    prefix=[
+        "{{system}}"
+    ],
+    prompt=[
+        "{{query}}"
+    ],
+    system=(
+        "You are a math expert and kind teacher who can help students solve math problems. "
+        "A student is working on a math problem and has finished part of the solution, but is stuck. "
+        "The problem is given after '### Problem:' and the student's work is given after '### Steps:'. "
+        "In fact, you have known the next step to take, but you prefer to give a HINT to the student so that he can figure it out by himself. "
+        "The next step is given after '### Next Step:'. "
+        "Your job is to come up with a HINT that can help him move one step forward based on the current work."
+    ),
+    sep=[
+        "\n\n"
+    ]
+)
+
 
 register_template(
     name="solve",

@@ -1,5 +1,5 @@
 TIME=$(date "+%m-%d-%H-%M")
-DATASET=instruction_no_added
+DATASET=instruction_nv
 TEMPLATE=solve
 
 # wandb
@@ -22,6 +22,10 @@ OUTPUT_DIR=~/models/llama-tuned/mistral-7b-$TEMPLATE-$DATASET-$TIME
 
 # Mistral 7B
 MODEL_NAME_OR_PATH="/data/cache/huggingface/hub/models--mistralai--Mistral-7B-v0.1/snapshots/5e9c98b96d071dce59368012254c55b0ec6f8658"
+
+# MetaMath Mistral with Added Tokens
+# MODEL_NAME_OR_PATH=/root/models/modified/metamath-7b-added_output_period
+
 
 # code llama
 # MODEL_NAME_OR_PATH=/lustre/cache/huggingface/models--codellama--CodeLlama-34b-hf/snapshots/fda69408949a7c6689a3cf7e93e632b8e70bb8ad

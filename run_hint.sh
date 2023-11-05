@@ -7,7 +7,7 @@ export WANDB_PROJECT=xukp20-generate-hint
 
 # set HF_HOME env
 # export HF_HOME=/lustre/cache/huggingface
-OUTPUT_DIR=~/models/llama-tuned/mistral-7b-generate-hint-$TEMPLATE-$DATASET-$TIME
+OUTPUT_DIR=~/models/llama-tuned/mistral-7b-$TEMPLATE-$DATASET-$TIME
 # OUTPUT_DIR=~/models/llama-tuned/llama-7b-$DATASET-$TIME
 
 # Mistral 7B
@@ -19,7 +19,7 @@ VAL_SIZE=0.01
 NUM_GPUS=8
 # LR=5e-5
 LR=1e-5
-EPOCHS=2
+EPOCHS=5
 CUTOFF_LEN=8192
 
 # accelerate launch src/train_bash.py \
@@ -44,7 +44,7 @@ deepspeed --num_gpus $NUM_GPUS --master_port=9901 src/train_bash.py \
     --lr_scheduler_type cosine \
     --max_grad_norm 1.0 \
     --logging_steps 5 \
-    --save_steps 200 \
+    --save_steps 100 \
     --warmup_steps 0 \
     --lora_rank 8 \
     --lora_dropout 0.1 \
