@@ -1,5 +1,5 @@
 TIME=$(date "+%m-%d-%H-%M")
-TASK=hint
+TASK=hint_summary
 DATASET=assist_$TASK
 TEMPLATE=$TASK
 
@@ -7,7 +7,7 @@ TEMPLATE=$TASK
 export WANDB_PROJECT=xukp20-assist-$TASK
 
 
-BASE_MODEL=llama
+BASE_MODEL=mistral
 # BASE_MODEL=llama
 
 # set HF_HOME env
@@ -29,9 +29,9 @@ fi
 VAL_SIZE=0.01
 NUM_GPUS=8
 # LR=5e-5
-LR=1e-6
+LR=5e-7
 EPOCHS=3
-CUTOFF_LEN=8192
+CUTOFF_LEN=4096
 
 # accelerate launch src/train_bash.py \
 # deepspeed --hostfile hostfile.txt src/train_bash.py \
